@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 import type { Storage } from "./types.ts";
 
 export function createMemoryStorage(): Storage {

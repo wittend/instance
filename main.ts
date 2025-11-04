@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 // flow-dash server (TS). Serves static files from /public and JSON APIs under /api.
 // Option B: TypeScript server with plain JS frontend.
 

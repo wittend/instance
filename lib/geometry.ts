@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 // Geometry helpers used conceptually by the frontend canvas
 // Keep pure and side-effect free for easy testing.
 

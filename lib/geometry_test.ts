@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 import { assertEquals, assert } from "@std/assert";
 import { arrowHead, bezierPath } from "./geometry.ts";
 

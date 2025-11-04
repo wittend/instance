@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 // Core project graph model and serialization/validation utilities
 // Shared conceptually with frontend, but this is the server-side TS version for validation and tests.
 

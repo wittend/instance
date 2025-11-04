@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 import { initMenu } from './ui/menu.js';
 import { initToolbar } from './ui/toolbar.js';
 import { initStatusbar, setStatus, setDirty } from './ui/statusbar.js';

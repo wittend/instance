@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 export interface Storage {
   list(): Promise<string[]>; // returns list of filenames like `${id}_prj.json`
   get(id: string): Promise<unknown | null>; // id without suffix
