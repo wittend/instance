@@ -1,0 +1,128 @@
+{
+  "id": "project4",
+  "name": null,
+  "version": 1,
+  "nodes": [
+    {
+      "id": "n_b43b99bb",
+      "guid": "sample-generator",
+      "name": "Sample Generator",
+      "x": 475,
+      "y": 204,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        }
+      ]
+    },
+    {
+      "id": "n_8c7dc106",
+      "guid": "sample-filter",
+      "name": "Sample Filter",
+      "x": 821,
+      "y": 275,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        },
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    },
+    {
+      "id": "n_fee0822e",
+      "guid": "sample-sink",
+      "name": "Sample Sink",
+      "x": 1146,
+      "y": 449,
+      "connectors": [
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    },
+    {
+      "id": "n_ccc7acf2",
+      "guid": "sample-sink",
+      "name": "Sample Sink",
+      "x": 1179,
+      "y": 604,
+      "connectors": [
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    },
+    {
+      "id": "n_81e73071",
+      "guid": "sample-generator",
+      "name": "Sample Generator",
+      "x": 495,
+      "y": 524,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_0242981f",
+      "from": {
+        "nodeId": "n_b43b99bb",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_8c7dc106",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_ceda58e3",
+      "from": {
+        "nodeId": "n_8c7dc106",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_fee0822e",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_333de5b0",
+      "from": {
+        "nodeId": "n_8c7dc106",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_ccc7acf2",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_8c9e556c",
+      "from": {
+        "nodeId": "n_81e73071",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_8c7dc106",
+        "connectorId": "in"
+      }
+    }
+  ]
+}

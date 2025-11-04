@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>flow-dash</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="menubar"></header>
+    <div id="toolbar"></div>
+    <main id="main">
+      <aside id="palette"></aside>
+      <section id="workspace">
+        <div id="canvas-container">
+          <canvas id="canvas" width="1200" height="800"></canvas>
+          <svg id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div id="statusbar"></div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

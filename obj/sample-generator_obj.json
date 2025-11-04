@@ -1,0 +1,13 @@
+{
+  "guid": "sample-generator",
+  "name": "Sample Generator",
+  "connectors": {
+    "sources": [
+      { "id": "out", "label": "out" }
+    ],
+    "sinks": []
+  },
+  "code": {
+    "process": "function generate(count=10){ return Array.from({length:count}, (_,i)=>i); }"
+  }
+}

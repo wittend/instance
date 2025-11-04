@@ -1,0 +1,14 @@
+flow-dash documentation
+=======================
+
+Welcome to the documentation for ``flow-dash`` — a Deno-based, flow-graph canvas app inspired by GNU Radio Companion.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   overview
+   getting_started
+   schema
+   storage
+   deploy

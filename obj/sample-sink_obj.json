@@ -1,0 +1,13 @@
+{
+  "guid": "sample-sink",
+  "name": "Sample Sink",
+  "connectors": {
+    "sources": [],
+    "sinks": [
+      { "id": "in", "label": "in" }
+    ]
+  },
+  "code": {
+    "process": "function consume(arr){ console.log('sink received', Array.isArray(arr)?arr.length:arr); return null; }"
+  }
+}

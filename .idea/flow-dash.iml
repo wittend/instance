@@ -5,6 +5,9 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv/include" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv/lib/python3.12/site-packages/furo/theme/furo/static/scripts" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv/lib/python3.12/site-packages/furo/theme/furo/static/styles" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

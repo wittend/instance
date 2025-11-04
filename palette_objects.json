@@ -1,0 +1,23 @@
+[
+  {
+    "guid": "sample-generator",
+    "hash": "",
+    "name": "Sample Generator",
+    "ordinal": 1,
+    "icon": "/assets/sample.svg"
+  },
+  {
+    "guid": "sample-filter",
+    "hash": "",
+    "name": "Sample Filter",
+    "ordinal": 2,
+    "icon": "/assets/sample.svg"
+  },
+  {
+    "guid": "sample-sink",
+    "hash": "",
+    "name": "Sample Sink",
+    "ordinal": 3,
+    "icon": "/assets/sample.svg"
+  }
+]

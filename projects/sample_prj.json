@@ -1,0 +1,78 @@
+{
+  "id": "sample",
+  "name": "Sample Flow",
+  "version": 1,
+  "nodes": [
+    {
+      "id": "n1",
+      "guid": "sample-generator",
+      "name": "Generator",
+      "x": 821,
+      "y": 318,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "guid": "sample-filter",
+      "name": "Filter",
+      "x": 1220,
+      "y": 654,
+      "connectors": [
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        },
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "guid": "sample-sink",
+      "name": "Sink",
+      "x": 1495,
+      "y": 308,
+      "connectors": [
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": {
+        "nodeId": "n1",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n2",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e2",
+      "from": {
+        "nodeId": "n2",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n3",
+        "connectorId": "in"
+      }
+    }
+  ]
+}

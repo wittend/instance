@@ -1,0 +1,15 @@
+{
+  "guid": "sample-filter",
+  "name": "Sample Filter",
+  "connectors": {
+    "sources": [
+      { "id": "out", "label": "out" }
+    ],
+    "sinks": [
+      { "id": "in", "label": "in" }
+    ]
+  },
+  "code": {
+    "process": "function filter(arr, predicate){ return Array.isArray(arr) ? arr.filter(predicate || (x=>x%2===0)) : arr; }"
+  }
+}
