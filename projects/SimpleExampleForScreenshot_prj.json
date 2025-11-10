@@ -1,0 +1,158 @@
+{
+  "id": "SimpleExampleForScreenshot",
+  "name": null,
+  "version": 1,
+  "nodes": [
+    {
+      "id": "n_90f42352",
+      "guid": "sample-generator",
+      "name": "Sample Generator",
+      "x": 327,
+      "y": 151,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        }
+      ]
+    },
+    {
+      "id": "n_7f039d2f",
+      "guid": "sample-filter",
+      "name": "Sample Filter",
+      "x": 642,
+      "y": 250,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        },
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    },
+    {
+      "id": "n_e8ce9cfd",
+      "guid": "sample-sink",
+      "name": "Sample Sink",
+      "x": 1151,
+      "y": 580,
+      "connectors": [
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    },
+    {
+      "id": "n_35aa65ef",
+      "guid": "sample-filter",
+      "name": "Sample Filter",
+      "x": 922,
+      "y": 164,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        },
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    },
+    {
+      "id": "n_71b93bda",
+      "guid": "sample-generator",
+      "name": "Sample Generator",
+      "x": 329,
+      "y": 437,
+      "connectors": [
+        {
+          "id": "out",
+          "kind": "source",
+          "name": "out"
+        }
+      ]
+    },
+    {
+      "id": "n_73bebaeb",
+      "guid": "sample-sink",
+      "name": "Sample Sink",
+      "x": 1248,
+      "y": 356,
+      "connectors": [
+        {
+          "id": "in",
+          "kind": "sink",
+          "name": "in"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_ede220d4",
+      "from": {
+        "nodeId": "n_90f42352",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_7f039d2f",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_ce82a603",
+      "from": {
+        "nodeId": "n_71b93bda",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_7f039d2f",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_1e79744b",
+      "from": {
+        "nodeId": "n_7f039d2f",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_35aa65ef",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_dceb5ad4",
+      "from": {
+        "nodeId": "n_35aa65ef",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_73bebaeb",
+        "connectorId": "in"
+      }
+    },
+    {
+      "id": "e_eb389bfe",
+      "from": {
+        "nodeId": "n_7f039d2f",
+        "connectorId": "out"
+      },
+      "to": {
+        "nodeId": "n_e8ce9cfd",
+        "connectorId": "in"
+      }
+    }
+  ]
+}

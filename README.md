@@ -3,7 +3,7 @@
 A minimal, Deno-based flow-graph editor and runtime scaffold inspired by GNU Radio Companion. Drag nodes from a palette onto a canvas, connect them, and save/load projects as JSON.
 
 <p align="center">
-  <img src="public/assets/sample.svg" alt="flow-dash sample" width="600" />
+  <img src="docs/Screenshot-2025-11-10.png" alt="flow-dash sample" width="600" />
 </p>
 
 
