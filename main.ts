@@ -75,6 +75,7 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
       return json({ error: "palette_objects.json not found" }, 404);
     }
   }
+  
 
   if (segments[0] === "api" && segments[1] === "objects" && method === "GET") {
     const guid = segments[2];
