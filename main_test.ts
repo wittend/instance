@@ -46,7 +46,7 @@ Deno.test("projects CRUD and validation", async () => {
   // save valid project
   const validProject = {
     id: "ignored", // will be overridden by server
-    version: 123,   // will be overridden if not a number; we send a number to pass schema
+    version: 123, // will be overridden if not a number; we send a number to pass schema
     nodes: [
       {
         id: "n1",
@@ -55,8 +55,8 @@ Deno.test("projects CRUD and validation", async () => {
         x: 100,
         y: 120,
         connectors: [
-          { id: "out", kind: "source", name: "out" }
-        ]
+          { id: "out", kind: "source", name: "out" },
+        ],
       },
       {
         id: "n2",
@@ -65,23 +65,23 @@ Deno.test("projects CRUD and validation", async () => {
         x: 300,
         y: 200,
         connectors: [
-          { id: "in", kind: "sink", name: "in" }
-        ]
-      }
+          { id: "in", kind: "sink", name: "in" },
+        ],
+      },
     ],
     edges: [
       {
         id: "e1",
         from: { nodeId: "n1", connectorId: "out" },
-        to: { nodeId: "n2", connectorId: "in" }
-      }
-    ]
+        to: { nodeId: "n2", connectorId: "in" },
+      },
+    ],
   };
 
   const saveRes = await fetch(`${base}/api/projects/test1_prj.json`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify(validProject)
+    body: JSON.stringify(validProject),
   });
   assert(saveRes.ok);
   const saveBody = await saveRes.json();
@@ -108,7 +108,7 @@ Deno.test("projects CRUD and validation", async () => {
   const badRes = await fetch(`${base}/api/projects/bad_prj.json`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify(badProject)
+    body: JSON.stringify(badProject),
   });
   assertEquals(badRes.status, 422);
   const badBody = await badRes.json();
@@ -119,7 +119,7 @@ Deno.test("projects CRUD and validation", async () => {
   const largeRes = await fetch(`${base}/api/projects/large_prj.json`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify(large)
+    body: JSON.stringify(large),
   });
   assertEquals(largeRes.status, 413);
   await largeRes.text();
@@ -138,7 +138,6 @@ Deno.test("projects CRUD and validation", async () => {
   ac.abort();
 });
 
-
 Deno.test("project rename endpoint", async () => {
   const ac = new AbortController();
   const server = startServer(0, ac.signal);
@@ -147,15 +146,27 @@ Deno.test("project rename endpoint", async () => {
 
   // create two simple projects
   const minimal = { nodes: [], edges: [] };
-  let res = await fetch(`${base}/api/projects/r1_prj.json`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(minimal) });
+  let res = await fetch(`${base}/api/projects/r1_prj.json`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(minimal),
+  });
   assert(res.ok);
   await res.text();
-  res = await fetch(`${base}/api/projects/r2_prj.json`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(minimal) });
+  res = await fetch(`${base}/api/projects/r2_prj.json`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(minimal),
+  });
   assert(res.ok);
   await res.text();
 
   // rename r1 -> r1b
-  let patch = await fetch(`${base}/api/projects/r1_prj.json`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ newId: 'r1b' }) });
+  let patch = await fetch(`${base}/api/projects/r1_prj.json`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ newId: "r1b" }),
+  });
   assert(patch.ok);
   await patch.text();
   const getOld = await fetch(`${base}/api/projects/r1_prj.json`);
@@ -164,17 +175,21 @@ Deno.test("project rename endpoint", async () => {
   const getNew = await fetch(`${base}/api/projects/r1b_prj.json`);
   assert(getNew.ok);
   const newBody = await getNew.json();
-  assertEquals(newBody.id, 'r1b');
+  assertEquals(newBody.id, "r1b");
 
   // conflict: try to rename r1b -> r2 (exists)
-  const conflict = await fetch(`${base}/api/projects/r1b_prj.json`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ newId: 'r2' }) });
+  const conflict = await fetch(`${base}/api/projects/r1b_prj.json`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ newId: "r2" }),
+  });
   assertEquals(conflict.status, 409);
   await conflict.text();
 
   // cleanup
-  const del1 = await fetch(`${base}/api/projects/r1b_prj.json`, { method: 'DELETE' });
+  const del1 = await fetch(`${base}/api/projects/r1b_prj.json`, { method: "DELETE" });
   await del1.text();
-  const del2 = await fetch(`${base}/api/projects/r2_prj.json`, { method: 'DELETE' });
+  const del2 = await fetch(`${base}/api/projects/r2_prj.json`, { method: "DELETE" });
   await del2.text();
 
   ac.abort();

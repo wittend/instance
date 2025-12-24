@@ -1,23 +1,23 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { showModal } from './modal.js';
+import { showModal } from "./modal.js";
 
 export function initMenu(container) {
   container.innerHTML = `
     <nav class="menu" role="menubar" aria-label="Application menu">
       <span class="menu-title">Flow Editor</span>
       <div class="menu-groups">
-        ${menuItem('File', fileMenu())}
-        ${menuItem('Edit', editMenu())}
-        ${menuItem('Tools', toolsMenu())}
-        ${menuItem('Help', helpMenu())}
+        ${menuItem("File", fileMenu())}
+        ${menuItem("Edit", editMenu())}
+        ${menuItem("Tools", toolsMenu())}
+        ${menuItem("Help", helpMenu())}
       </div>
     </nav>
   `;
   wireDropdowns(container);
 }
 
-function menuItem(label, dropdownHtml){
+function menuItem(label, dropdownHtml) {
   return `
     <div class="menu-item" aria-expanded="false">
       <button type="button">${label}</button>
@@ -28,74 +28,80 @@ function menuItem(label, dropdownHtml){
   `;
 }
 
-function item(label, action, { disabled = false } = {}){
-  const dis = disabled ? 'aria-disabled="true" data-disabled="1"' : '';
+function item(label, action, { disabled = false } = {}) {
+  const dis = disabled ? 'aria-disabled="true" data-disabled="1"' : "";
   return `<div class="item" role="menuitem" data-action="${action}" ${dis}>${label}</div>`;
 }
-function sep(){ return '<div class="sep" aria-hidden="true"></div>'; }
+function sep() {
+  return '<div class="sep" aria-hidden="true"></div>';
+}
 
-function fileMenu(){
+function fileMenu() {
   return [
-    item('New', 'app:new'),
-    item('Open…', 'app:open'),
+    item("New", "app:new"),
+    item("Open…", "app:open"),
     sep(),
-    item('Save', 'app:save'),
-    item('Save As…', 'app:save-as')
-  ].join('');
+    item("Save", "app:save"),
+    item("Save As…", "app:save-as"),
+  ].join("");
 }
-function editMenu(){
+function editMenu() {
   return [
-    item('Undo', 'app:undo', { disabled: true }),
-    item('Redo', 'app:redo', { disabled: true })
-  ].join('');
+    item("Undo", "app:undo", { disabled: true }),
+    item("Redo", "app:redo", { disabled: true }),
+  ].join("");
 }
-function toolsMenu(){
+function toolsMenu() {
   return [
-    item('Options…', 'app:options', { disabled: true })
-  ].join('');
+    item("Options…", "app:options", { disabled: true }),
+  ].join("");
 }
-function helpMenu(){
+function helpMenu() {
   return [
-    item('About', 'app:about')
-  ].join('');
+    item("About", "app:about"),
+  ].join("");
 }
 
-function wireDropdowns(root){
+function wireDropdowns(root) {
   // Toggle open/close on click
-  const items = root.querySelectorAll('.menu-item');
-  items.forEach(it => {
-    const btn = it.querySelector('button');
-    btn?.addEventListener('click', (e)=>{
-      const expanded = it.getAttribute('aria-expanded') === 'true';
+  const items = root.querySelectorAll(".menu-item");
+  items.forEach((it) => {
+    const btn = it.querySelector("button");
+    btn?.addEventListener("click", (e) => {
+      const expanded = it.getAttribute("aria-expanded") === "true";
       closeAll(root);
-      it.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      it.setAttribute("aria-expanded", expanded ? "false" : "true");
       e.stopPropagation();
     });
-    it.querySelector('.menu-dropdown')?.addEventListener('click', (e)=>{
+    it.querySelector(".menu-dropdown")?.addEventListener("click", (e) => {
       const target = e.target;
       if (!(target instanceof HTMLElement)) return;
-      if (target.dataset.disabled === '1') return;
+      if (target.dataset.disabled === "1") return;
       const action = target.dataset.action;
       if (action) {
         window.dispatchEvent(new CustomEvent(action));
         closeAll(root);
-        if (action === 'app:about') {
+        if (action === "app:about") {
           showAbout();
         }
       }
     });
   });
   // click outside closes
-  document.addEventListener('click', ()=> closeAll(root));
-  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeAll(root); });
+  document.addEventListener("click", () => closeAll(root));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll(root);
+  });
 }
 
-function closeAll(root){
-  root.querySelectorAll('.menu-item[aria-expanded="true"]').forEach(el=> el.setAttribute('aria-expanded','false'));
+function closeAll(root) {
+  root.querySelectorAll('.menu-item[aria-expanded="true"]').forEach((el) =>
+    el.setAttribute("aria-expanded", "false")
+  );
 }
 
-function showAbout(){
-  const content = document.createElement('div');
+function showAbout() {
+  const content = document.createElement("div");
   content.innerHTML = `
     <div style="display:grid; gap:8px;">
       <div><strong>Flow Editor</strong></div>
@@ -105,5 +111,5 @@ function showAbout(){
       </div>
     </div>
   `;
-  showModal({ title: 'About', content });
+  showModal({ title: "About", content });
 }

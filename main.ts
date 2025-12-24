@@ -60,11 +60,15 @@ async function ensureFsAvailable() {
   return fsAvailable;
 }
 
-import { validateProject, CURRENT_SCHEMA_VERSION, GraphValidationError } from "./lib/graph.ts";
+import { CURRENT_SCHEMA_VERSION, GraphValidationError, validateProject } from "./lib/graph.ts";
 import { createStorageFromEnv } from "./lib/storage/index.ts";
 
 // API handlers
-async function handleApi(req: Request, url: URL, storagePromise: Promise<import('./lib/storage/types.ts').Storage>): Promise<Response> {
+async function handleApi(
+  req: Request,
+  url: URL,
+  storagePromise: Promise<import("./lib/storage/types.ts").Storage>,
+): Promise<Response> {
   const { pathname, segments, method } = matchRoute(url, req.method);
 
   if (pathname === "/api/health" && method === "GET") {
@@ -80,7 +84,6 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
       return json({ error: "palette_objects.json not found" }, 404);
     }
   }
-  
 
   if (segments[0] === "api" && segments[1] === "objects" && method === "GET") {
     const guid = segments[2];
@@ -95,7 +98,9 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
     }
   }
 
-  if (segments[0] === "api" && segments[1] === "projects" && method === "GET" && segments.length === 2) {
+  if (
+    segments[0] === "api" && segments[1] === "projects" && method === "GET" && segments.length === 2
+  ) {
     // list projects
     try {
       const storage = await storagePromise;
@@ -178,7 +183,9 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
     if (body.error) return json(body, 400);
     const newId = typeof body?.newId === "string" ? body.newId.trim() : "";
     if (!newId) return json({ error: "newId is required" }, 400);
-    if (!/^[a-zA-Z0-9_-]+$/.test(newId)) return json({ error: "newId has invalid characters" }, 400);
+    if (!/^[a-zA-Z0-9_-]+$/.test(newId)) {
+      return json({ error: "newId has invalid characters" }, 400);
+    }
     try {
       const storage = await storagePromise;
       const existing = await storage.get(oldId);
@@ -186,11 +193,13 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
       const conflict = await storage.get(newId);
       if (conflict) return json({ error: "conflict: target exists" }, 409);
       // perform rename in storage backend
-      if (typeof storage.rename === 'function') {
-        try { await storage.rename(oldId, newId); } catch (e) {
+      if (typeof storage.rename === "function") {
+        try {
+          await storage.rename(oldId, newId);
+        } catch (e) {
           const msg = e instanceof Error ? e.message : String(e);
-          if (msg === 'not_found') return json({ error: "not found" }, 404);
-          if (msg === 'conflict') return json({ error: "conflict: target exists" }, 409);
+          if (msg === "not_found") return json({ error: "not found" }, 404);
+          if (msg === "conflict") return json({ error: "conflict: target exists" }, 409);
           throw e;
         }
       } else {
@@ -199,7 +208,7 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
         await storage.remove(oldId);
       }
       // ensure content has updated id
-      if (existing && typeof existing === 'object') {
+      if (existing && typeof existing === "object") {
         (existing as any).id = newId;
         await (await storagePromise).save(newId, existing);
       }

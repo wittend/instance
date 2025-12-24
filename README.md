@@ -1,19 +1,20 @@
-# instance 
+# instance
 
-A minimal, Deno-based flow-graph editor and runtime scaffold inspired by GNU Radio Companion. Drag nodes from a palette onto a canvas, connect them, and save/load projects as JSON.
+A minimal, Deno-based flow-graph editor and runtime scaffold inspired by GNU Radio Companion. Drag
+nodes from a palette onto a canvas, connect them, and save/load projects as JSON.
 
 <p align="center">
   <img src="docs/Screenshot-2025-11-10.png" alt="instance sample" width="600" />
 </p>
 
-
 ## Badges
 
 - Runtime: [Deno](https://deno.com/runtime) 2.x
-- CI: [![Deno CI](https://github.com/your-org-or-user/instance/actions/workflows/deno.yml/badge.svg)](.github/workflows/deno.yml)
-- Docs: [![Documentation Status](https://readthedocs.org/projects/instance/badge/?version=latest)](https://instance.readthedocs.io/en/latest/?badge=latest)
+- CI:
+  [![Deno CI](https://github.com/your-org-or-user/instance/actions/workflows/deno.yml/badge.svg)](.github/workflows/deno.yml)
+- Docs:
+  [![Documentation Status](https://readthedocs.org/projects/instance/badge/?version=latest)](https://instance.readthedocs.io/en/latest/?badge=latest)
 - License: [![License: GPL v3](https://img.shields.io/badge/License-GPLv3+-blue.svg)](LICENSE)
-
 
 ## Features
 
@@ -22,7 +23,6 @@ A minimal, Deno-based flow-graph editor and runtime scaffold inspired by GNU Rad
 - Pluggable storage adapters: filesystem, in-memory, and Deno KV
 - Validated project schema with clear errors on invalid payloads
 - Simple geometry helpers and tests for SVG edge rendering
-
 
 ## Project Layout
 
@@ -45,10 +45,10 @@ A minimal, Deno-based flow-graph editor and runtime scaffold inspired by GNU Rad
 └── .github/workflows/deno.yml  # CI
 ```
 
-
 ## Quick Start (Local Dev)
 
 Prerequisites:
+
 - Deno 2.4+ (stable)
 
 Start the dev server:
@@ -61,7 +61,6 @@ Open the app:
 
 - http://localhost:8000
 
-
 ## Using the App
 
 - The left panel shows the palette defined by `palette_objects.json`
@@ -70,7 +69,6 @@ Open the app:
 - Create a connection by clicking a source handle (right) then a sink handle (left)
 - Use the toolbar to Save / Save As / Open
 - On local dev with filesystem storage, projects are written under `./projects`
-
 
 ## API Overview
 
@@ -106,12 +104,12 @@ Content-Type: application/json
 
 Validation errors are returned with HTTP 422 and include details from `lib/graph.ts`.
 
-
 ## Storage Configuration
 
 `instance` supports multiple storage backends behind a common interface (`lib/storage/types.ts`).
 
 Adapters:
+
 - Filesystem (`fs`): saves JSON files under `./projects`
 - Memory (`memory`): in-memory map (non-persistent); default for tests and fallback
 - Deno KV (`kv`): persistent key-value store (ideal for Deno Deploy)
@@ -124,8 +122,8 @@ STORAGE=memory deno task test
 STORAGE=kv     deno run --allow-net --allow-env main.ts
 ```
 
-The server will try the requested adapter first, then gracefully fall back in this order: `kv → fs → memory`.
-
+The server will try the requested adapter first, then gracefully fall back in this order:
+`kv → fs → memory`.
 
 ## Tasks, Lint, and Checks
 
@@ -149,37 +147,37 @@ deno task lint
 deno task check
 ```
 
-
 ## Deploying to Deno Deploy
 
 Quick test (non-persistent memory storage):
+
 - Create a Deploy project from this repo and set the entrypoint to `main.ts`
 - Leave env vars unset → storage will be memory
 
 Enable persistence with Deno KV:
+
 - In your Deploy project, enable a KV database
 - Set env var `STORAGE=kv`
 - Redeploy; projects will be stored under keys `["projects", <id>]`
 
 See `docs/deploy.rst` for details.
 
-
 ## Documentation
 
 - Read the Docs (latest): https://instance.readthedocs.io/en/latest/
-- API reference (Doxygen) on RTD: https://instance.readthedocs.io/en/latest/_static/doxygen/index.html
+- API reference (Doxygen) on RTD:
+  https://instance.readthedocs.io/en/latest/_static/doxygen/index.html
 - Build locally:
-  - Sphinx HTML: `pip install -r docs/requirements.txt && sphinx-build -b html docs docs/_build/html`
+  - Sphinx HTML:
+    `pip install -r docs/requirements.txt && sphinx-build -b html docs docs/_build/html`
   - Doxygen API: `doxygen docs/Doxyfile` then open `docs/_static/doxygen/html/index.html`
 - A prebuilt local copy may also exist under `docs/_build/html/index.html`.
-
 
 ## Schema and Palette
 
 - Project JSON schema and validation logic: `lib/graph.ts`
 - Palette: `palette_objects.json`
 - Object definitions referenced by the palette: `./obj/*_obj.json`
-
 
 ## Roadmap / Ideas
 
@@ -189,12 +187,11 @@ See `docs/deploy.rst` for details.
 - Undo/redo stack
 - Authentication for APIs
 
-
 ## Contributing
 
 Issues and PRs are welcome. Please run `deno task fmt` and `deno task lint` before submitting.
 
-
 ## License
 
-This project is licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later) — see the `LICENSE` file for details.
+This project is licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later) — see
+the `LICENSE` file for details.
