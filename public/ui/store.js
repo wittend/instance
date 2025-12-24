@@ -62,11 +62,21 @@ export function updateLinkPreview(point){
 }
 export function cancelLink(){ state.linking = null; emit(); }
 
+// Helper for UUID generation in non-secure contexts
+function getUUID() {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  // Fallback to simpler random if not available
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 export function finishLink(to){
   if(!state.linking) return;
   const from = state.linking.from;
   // prevent duplicate ids
-  const id = `e_${crypto.randomUUID().slice(0,8)}`;
+  const id = `e_${getUUID().slice(0,8)}`;
   state.edges.push({ id, from, to });
   state.linking = null;
   markDirty(true);

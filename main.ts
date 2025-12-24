@@ -22,15 +22,20 @@ const CONTENT_TYPES: Record<string, string> = {
 // Utility to serve a static file under /public
 async function serveFile(path: string): Promise<Response> {
   try {
+    const fileInfo = await Deno.stat(path);
+    if (fileInfo.isDirectory) {
+      // If it's a directory, try adding /index.html
+      return await serveFile(path.endsWith("/") ? `${path}index.html` : `${path}/index.html`);
+    }
     const data = await Deno.readFile(path);
-    const ext = path.substring(path.lastIndexOf("."));
+    const ext = path.substring(path.lastIndexOf(".")).toLowerCase();
     const type = CONTENT_TYPES[ext] ?? "application/octet-stream";
     return new Response(data, { headers: { "content-type": type } });
   } catch (err) {
     if (err instanceof Deno.errors.NotFound) {
       return new Response("Not Found", { status: 404 });
     }
-    console.error("serveFile error:", err);
+    console.error(`serveFile error (${path}):`, err);
     return new Response("Internal Server Error", { status: 500 });
   }
 }
@@ -68,7 +73,7 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
 
   if (pathname === "/api/palette" && method === "GET") {
     try {
-      const text = await Deno.readTextFile("./palette_objects.json");
+      const text = await Deno.readTextFile("./public/palette_objects.json");
       return new Response(text, { headers: { "content-type": CONTENT_TYPES[".json"] } });
     } catch (e) {
       console.error("/api/palette error", e);
@@ -81,7 +86,7 @@ async function handleApi(req: Request, url: URL, storagePromise: Promise<import(
     const guid = segments[2];
     if (!guid) return json({ error: "Missing guid" }, 400);
     try {
-      const path = `./obj/${guid}_obj.json`;
+      const path = `./public/obj/${guid}_obj.json`;
       const text = await Deno.readTextFile(path);
       return new Response(text, { headers: { "content-type": CONTENT_TYPES[".json"] } });
     } catch (e) {
@@ -227,15 +232,25 @@ async function safeJson(req: Request): Promise<any> {
 
 // Static file resolution
 async function handleStatic(url: URL): Promise<Response> {
-  let path = url.pathname;
-  if (path === "/") path = "/index.html";
+  const path = url.pathname;
+  if (path === "/") return await serveFile("./public/index.html");
+  if (path === "/favicon.ico") return await serveFile("./public/favicon.ico");
+
+  // Handle /docs by serving from docs/_build/html
+  if (path.startsWith("/docs")) {
+    let sub = path.substring(5);
+    if (!sub || sub === "/") sub = "/index.html";
+    if (sub.includes("..")) return new Response("Bad Request", { status: 400 });
+    return await serveFile(`./docs/_build/html${sub}`);
+  }
+
   // prevent path traversal
   if (path.includes("..")) return new Response("Bad Request", { status: 400 });
   return await serveFile(`./public${path}`);
 }
 
 export function startServer(port: number, signal?: AbortSignal) {
-  console.log(`instance server listening on http://localhost:${port}`);
+  console.log(`Flow Editor server listening on http://localhost:${port}`);
   // Initialize storage per-server to respect current env (useful in tests)
   const storagePromise = createStorageFromEnv();
   const server = Deno.serve({ port, signal }, async (req) => {

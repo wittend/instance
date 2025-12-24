@@ -6,6 +6,16 @@
 //
 import { subscribe, addNode, getState, moveNode, startLink, updateLinkPreview, cancelLink, finishLink } from './store.js';
 
+// Helper for UUID generation in non-secure contexts
+function getUUID() {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  // Fallback to simpler random if not available
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 export function initCanvas(canvasEl, svgEl){
   const ctx = canvasEl.getContext('2d');
 
@@ -42,7 +52,7 @@ export function initCanvas(canvasEl, svgEl){
       const rect = canvasEl.getBoundingClientRect();
       const x = Math.floor(rect.width / 2);
       const y = Math.floor(rect.height / 2);
-      const res = await fetch(`/api/objects/${guid}`);
+      const res = await fetch(`/obj/${guid}_obj.json`);
       const def = res.ok ? await res.json() : null;
       const sources = def?.connectors?.sources ?? [];
       const sinks = def?.connectors?.sinks ?? [];
@@ -50,7 +60,7 @@ export function initCanvas(canvasEl, svgEl){
         ...sources.map(s=>({ id: s.id, kind: 'source', name: s.label ?? s.id })),
         ...sinks.map(s=>({ id: s.id, kind: 'sink', name: s.label ?? s.id })),
       ];
-      const id = `n_${crypto.randomUUID().slice(0,8)}`;
+      const id = `n_${getUUID().slice(0,8)}`;
       addNode({ id, guid, name: def?.name ?? guid, x, y, connectors });
     }catch(err){ console.error('add-node failed', err); }
   });
@@ -70,7 +80,7 @@ export function initCanvas(canvasEl, svgEl){
         const guid = obj.guid;
         // fetch object definition to get connectors
         try{
-          const res = await fetch(`/api/objects/${guid}`);
+          const res = await fetch(`/obj/${guid}_obj.json`);
           const def = res.ok ? await res.json() : null;
           const sources = def?.connectors?.sources ?? [];
           const sinks = def?.connectors?.sinks ?? [];
@@ -78,7 +88,7 @@ export function initCanvas(canvasEl, svgEl){
             ...sources.map(s=>({ id: s.id, kind: 'source', name: s.label ?? s.id })),
             ...sinks.map(s=>({ id: s.id, kind: 'sink', name: s.label ?? s.id })),
           ];
-          const id = `n_${crypto.randomUUID().slice(0,8)}`;
+          const id = `n_${getUUID().slice(0,8)}`;
           addNode({ id, guid, name: def?.name ?? guid, x, y, connectors });
         }catch(err){ console.error('object def load failed', err); }
       }

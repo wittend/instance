@@ -3,7 +3,7 @@
 // Doxygen: Palette panel for adding nodes to the canvas via click or drag-and-drop.
 export async function initPalette(container){
   container.innerHTML = '<div>Loading palette...</div>';
-  const res = await fetch('/api/palette');
+  const res = await fetch('/palette_objects.json');
   if(!res.ok){
     container.innerHTML = '<div>Failed to load palette</div>';
     return;
