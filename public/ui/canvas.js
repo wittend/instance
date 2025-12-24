@@ -13,7 +13,7 @@ import {
   startLink,
   subscribe,
   updateLinkPreview,
-  updateNode,
+  updateNode as _updateNode,
 } from "./store.js";
 import { showNodeEditor } from "./popup_editor.js";
 

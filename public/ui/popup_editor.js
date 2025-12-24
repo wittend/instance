@@ -70,7 +70,7 @@ export function showNodeEditor(node, { x, y, canvasRect, onSave }) {
   saveBtn.onclick = () => {
     updateNode(node.id, {
       name: nameInput.value,
-      code: { process: codeInput.value }
+      code: { process: codeInput.value },
     });
     if (onSave) onSave();
     overlay.remove();
@@ -90,22 +90,22 @@ export function showNodeEditor(node, { x, y, canvasRect, onSave }) {
   // Position logic: above the object
   // node coordinates (x, y) are center of node in canvas space
   // canvasRect is result of canvas.getBoundingClientRect()
-  
+
   const popupRect = popup.getBoundingClientRect();
   let top = canvasRect.top + y - 32 - popupRect.height; // 32 is roughly half node height + margin
   let left = canvasRect.left + x - popupRect.width / 2;
 
   // Keep in viewport
   if (left < 10) left = 10;
-  if (left + popupRect.width > window.innerWidth - 10) {
-    left = window.innerWidth - popupRect.width - 10;
+  if (left + popupRect.width > globalThis.innerWidth - 10) {
+    left = globalThis.innerWidth - popupRect.width - 10;
   }
   if (top < 10) {
     // If not enough space above, show below
     top = canvasRect.top + y + 32;
   }
-  if (top + popupRect.height > window.innerHeight - 10) {
-    top = window.innerHeight - popupRect.height - 10;
+  if (top + popupRect.height > globalThis.innerHeight - 10) {
+    top = globalThis.innerHeight - popupRect.height - 10;
   }
 
   popup.style.top = `${top}px`;
