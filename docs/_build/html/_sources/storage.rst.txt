@@ -1,7 +1,7 @@
 Storage Modes
 =============
 
-``flow-dash`` supports multiple storage backends for project files behind a common interface.
+``instance`` supports multiple storage backends for project files behind a common interface.
 
 Adapters
 --------

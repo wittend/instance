@@ -1,4 +1,4 @@
-flow-dash documentation
+instance documentation
 =======================
 
 Welcome to the documentation for ``instance`` — a Deno-based, flow-graph canvas app inspired by GNU Radio Companion.

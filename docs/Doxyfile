@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-# Doxygen configuration for flow-dash (TypeScript/JavaScript)
+# Doxygen configuration for instance (TypeScript/JavaScript)
 # Generates HTML API docs into Sphinx static path so it can be served on RTD.
 
 # Project

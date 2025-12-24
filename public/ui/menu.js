@@ -5,7 +5,7 @@ import { showModal } from './modal.js';
 export function initMenu(container) {
   container.innerHTML = `
     <nav class="menu" role="menubar" aria-label="Application menu">
-      <span class="menu-title">flow-dash</span>
+      <span class="menu-title">instance</span>
       <div class="menu-groups">
         ${menuItem('File', fileMenu())}
         ${menuItem('Edit', editMenu())}
@@ -98,7 +98,7 @@ function showAbout(){
   const content = document.createElement('div');
   content.innerHTML = `
     <div style="display:grid; gap:8px;">
-      <div><strong>flow-dash</strong></div>
+      <div><strong>instance</strong></div>
       <div>Lightweight flow-graph editor (Deno + plain JS)</div>
       <div>
         <a href="/docs" target="_blank" rel="noopener" style="color: var(--wire); text-decoration: none;">Documentation</a>
