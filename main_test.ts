@@ -14,7 +14,7 @@ function getPort(server: Deno.ServeHandler) {
 Deno.test("health and static index", async () => {
   const ac = new AbortController();
   const server = startServer(0, ac.signal);
-  const port = getPort(server as any);
+  const port = getPort(server as unknown as Deno.ServeHandler);
   const base = `http://localhost:${port}`;
 
   const res = await fetch(`${base}/api/health`);
@@ -33,7 +33,7 @@ Deno.test("health and static index", async () => {
 Deno.test("projects CRUD and validation", async () => {
   const ac = new AbortController();
   const server = startServer(0, ac.signal);
-  const port = getPort(server as any);
+  const port = getPort(server as unknown as Deno.ServeHandler);
   const base = `http://localhost:${port}`;
 
   // list initially (memory storage default in test task)
@@ -104,7 +104,7 @@ Deno.test("projects CRUD and validation", async () => {
   assertEquals(getBody.edges.length, 1);
 
   // invalid save (nodes is not array)
-  const badProject = { nodes: "oops", edges: [] } as any;
+  const badProject = { nodes: "oops", edges: [] };
   const badRes = await fetch(`${base}/api/projects/bad_prj.json`, {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -141,7 +141,8 @@ Deno.test("projects CRUD and validation", async () => {
 Deno.test("project rename endpoint", async () => {
   const ac = new AbortController();
   const server = startServer(0, ac.signal);
-  const port = ((server as any).addr && (server as any).addr.port) || 8000;
+  const addr = (server as unknown as { addr: Deno.NetAddr }).addr;
+  const port = addr?.port || 8000;
   const base = `http://localhost:${port}`;
 
   // create two simple projects
@@ -162,7 +163,7 @@ Deno.test("project rename endpoint", async () => {
   await res.text();
 
   // rename r1 -> r1b
-  let patch = await fetch(`${base}/api/projects/r1_prj.json`, {
+  const patch = await fetch(`${base}/api/projects/r1_prj.json`, {
     method: "PATCH",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ newId: "r1b" }),

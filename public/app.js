@@ -18,7 +18,7 @@ import { toast } from "./ui/toast.js";
 import { showModal } from "./ui/modal.js";
 
 function preferSystemDark() {
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return globalThis.matchMedia && globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 function getTheme() {
   const saved = localStorage.getItem("theme");
@@ -27,13 +27,13 @@ function getTheme() {
 }
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  window.dispatchEvent(new CustomEvent("app:theme-changed", { detail: { theme } }));
+  globalThis.dispatchEvent(new CustomEvent("app:theme-changed", { detail: { theme } }));
 }
 
 async function main() {
   // Theme management
   applyTheme(getTheme());
-  window.addEventListener("app:toggle-theme", () => {
+  globalThis.addEventListener("app:toggle-theme", () => {
     const next = (getTheme() === "dark") ? "light" : "dark";
     localStorage.setItem("theme", next);
     applyTheme(next);
@@ -49,25 +49,25 @@ async function main() {
     setDirty(state.dirty);
   });
 
-  window.addEventListener("app:new", () => {
+  globalThis.addEventListener("app:new", () => {
     if (getState().dirty && !confirm("Discard unsaved changes?")) return;
     newProject();
     setStatus("New project");
   });
 
-  window.addEventListener("app:open", async () => {
+  globalThis.addEventListener("app:open", async () => {
     if (getState().dirty && !confirm("Discard unsaved changes?")) return;
     await openProjectFlow();
   });
 
-  window.addEventListener("app:save-as", async () => {
+  globalThis.addEventListener("app:save-as", async () => {
     const id = prompt("Enter project id (no extension):", getState().id || "untitled");
     if (!id) return;
     setProjectId(id);
     await saveCurrent();
   });
 
-  window.addEventListener("app:save", async () => {
+  globalThis.addEventListener("app:save", async () => {
     if (!getState().id) {
       const id = prompt("Enter project id (no extension):", "untitled");
       if (!id) return;
@@ -76,7 +76,7 @@ async function main() {
     await saveCurrent();
   });
 
-  window.addEventListener("beforeunload", (e) => {
+  globalThis.addEventListener("beforeunload", (e) => {
     if (getState().dirty) {
       e.preventDefault();
       e.returnValue = "";
@@ -129,7 +129,7 @@ async function openProjectFlow() {
   }
 }
 
-async function showOpenModal(fileList) {
+function showOpenModal(fileList) {
   // fileList: array of filenames like `${id}_prj.json`
   let list = [...fileList];
   const container = document.createElement("div");

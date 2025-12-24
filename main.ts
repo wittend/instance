@@ -42,23 +42,7 @@ async function serveFile(path: string): Promise<Response> {
 
 // In-memory store fallback for Deploy or restricted environments
 type Project = { id: string; data: unknown };
-const memoryProjects = new Map<string, unknown>();
-let fsAvailable: boolean | null = null;
-async function ensureFsAvailable() {
-  if (fsAvailable !== null) return fsAvailable;
-  try {
-    await Deno.mkdir("./projects", { recursive: true });
-    // Probe read/write
-    const probe = crypto.randomUUID();
-    await Deno.writeTextFile("./projects/.probe", probe);
-    const readBack = await Deno.readTextFile("./projects/.probe");
-    await Deno.remove("./projects/.probe");
-    fsAvailable = readBack === probe;
-  } catch (_e) {
-    fsAvailable = false;
-  }
-  return fsAvailable;
-}
+const _memoryProjects = new Map<string, unknown>();
 
 import { CURRENT_SCHEMA_VERSION, GraphValidationError, validateProject } from "./lib/graph.ts";
 import { createStorageFromEnv } from "./lib/storage/index.ts";
@@ -209,7 +193,7 @@ async function handleApi(
       }
       // ensure content has updated id
       if (existing && typeof existing === "object") {
-        (existing as any).id = newId;
+        (existing as Record<string, unknown>).id = newId;
         await (await storagePromise).save(newId, existing);
       }
       return json({ ok: true });
@@ -229,7 +213,7 @@ function json(data: unknown, status = 200) {
   });
 }
 
-async function safeJson(req: Request): Promise<any> {
+async function safeJson(req: Request): Promise<Record<string, unknown>> {
   try {
     const text = await req.text();
     if (!text) return {};
@@ -259,7 +243,7 @@ async function handleStatic(url: URL): Promise<Response> {
 }
 
 export function startServer(port: number, signal?: AbortSignal) {
-  console.log(`Flow Editor server listening on http://localhost:${port}`);
+  console.log(`instance server listening on http://localhost:${port}`);
   // Initialize storage per-server to respect current env (useful in tests)
   const storagePromise = createStorageFromEnv();
   const server = Deno.serve({ port, signal }, async (req) => {

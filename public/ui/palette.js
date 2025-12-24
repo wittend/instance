@@ -47,7 +47,7 @@ function renderPalette(container, palette) {
 
     // Click-to-add convenience: spawns node at canvas center
     el.addEventListener("click", () => {
-      window.dispatchEvent(new CustomEvent("app:add-node", { detail: { guid: item.guid } }));
+      globalThis.dispatchEvent(new CustomEvent("app:add-node", { detail: { guid: item.guid } }));
     });
 
     container.appendChild(el);

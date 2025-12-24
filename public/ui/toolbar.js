@@ -34,5 +34,5 @@ export function initToolbar(container) {
 }
 
 function dispatch(type, detail) {
-  window.dispatchEvent(new CustomEvent(type, { detail }));
+  globalThis.dispatchEvent(new CustomEvent(type, { detail }));
 }

@@ -9,6 +9,7 @@
   "imports": {
     "@std/assert": "jsr:@std/assert@1"
   },
+  "vendor": true,
   "fmt": {
     "useTabs": false,
     "indentWidth": 2,

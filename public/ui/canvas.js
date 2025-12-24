@@ -43,7 +43,7 @@ export function initCanvas(canvasEl, svgEl) {
     `;
   }
   buildDefs();
-  window.addEventListener("app:theme-changed", () => {
+  globalThis.addEventListener("app:theme-changed", () => {
     buildDefs();
     render();
   });
@@ -53,11 +53,11 @@ export function initCanvas(canvasEl, svgEl) {
   let dragging = null; // { nodeId, offsetX, offsetY }
 
   resize();
-  window.addEventListener("resize", resize);
+  globalThis.addEventListener("resize", resize);
   subscribe(() => render());
 
   // Support click-to-add from palette
-  window.addEventListener("app:add-node", async (ev) => {
+  globalThis.addEventListener("app:add-node", async (ev) => {
     try {
       const guid = ev?.detail?.guid;
       if (!guid) return;
@@ -150,7 +150,7 @@ export function initCanvas(canvasEl, svgEl) {
     if (st.linking) updateLinkPreview({ x, y });
   });
 
-  window.addEventListener("mouseup", () => {
+  globalThis.addEventListener("mouseup", () => {
     dragging = null;
   });
   canvasEl.addEventListener("mouseleave", () => {

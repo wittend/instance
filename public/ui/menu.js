@@ -5,7 +5,7 @@ import { showModal } from "./modal.js";
 export function initMenu(container) {
   container.innerHTML = `
     <nav class="menu" role="menubar" aria-label="Application menu">
-      <span class="menu-title">Flow Editor</span>
+      <span class="menu-title">instance</span>
       <div class="menu-groups">
         ${menuItem("File", fileMenu())}
         ${menuItem("Edit", editMenu())}
@@ -79,7 +79,7 @@ function wireDropdowns(root) {
       if (target.dataset.disabled === "1") return;
       const action = target.dataset.action;
       if (action) {
-        window.dispatchEvent(new CustomEvent(action));
+        globalThis.dispatchEvent(new CustomEvent(action));
         closeAll(root);
         if (action === "app:about") {
           showAbout();
@@ -104,7 +104,7 @@ function showAbout() {
   const content = document.createElement("div");
   content.innerHTML = `
     <div style="display:grid; gap:8px;">
-      <div><strong>Flow Editor</strong></div>
+      <div><strong>instance</strong></div>
       <div>Lightweight flow-graph editor (Deno + plain JS)</div>
       <div>
         <a href="/docs/" target="_blank" rel="noopener" style="color: var(--wire); text-decoration: none;">Documentation</a>
