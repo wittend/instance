@@ -25,7 +25,7 @@ Deno.test("health and static index", async () => {
   const res2 = await fetch(`${base}/`);
   assert(res2.ok);
   const html = await res2.text();
-  assert(html.includes("flow-dash"));
+  assert(html.includes("instance"));
 
   ac.abort();
 });

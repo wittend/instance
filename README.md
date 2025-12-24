@@ -1,17 +1,17 @@
-# flow-dash
+# instance 
 
 A minimal, Deno-based flow-graph editor and runtime scaffold inspired by GNU Radio Companion. Drag nodes from a palette onto a canvas, connect them, and save/load projects as JSON.
 
 <p align="center">
-  <img src="docs/Screenshot-2025-11-10.png" alt="flow-dash sample" width="600" />
+  <img src="docs/Screenshot-2025-11-10.png" alt="instance sample" width="600" />
 </p>
 
 
 ## Badges
 
 - Runtime: [Deno](https://deno.com/runtime) 2.x
-- CI: [![Deno CI](https://github.com/your-org-or-user/flow-dash/actions/workflows/deno.yml/badge.svg)](.github/workflows/deno.yml)
-- Docs: [![Documentation Status](https://readthedocs.org/projects/flow-dash/badge/?version=latest)](https://flow-dash.readthedocs.io/en/latest/?badge=latest)
+- CI: [![Deno CI](https://github.com/your-org-or-user/instance/actions/workflows/deno.yml/badge.svg)](.github/workflows/deno.yml)
+- Docs: [![Documentation Status](https://readthedocs.org/projects/instance/badge/?version=latest)](https://instance.readthedocs.io/en/latest/?badge=latest)
 - License: [![License: GPL v3](https://img.shields.io/badge/License-GPLv3+-blue.svg)](LICENSE)
 
 
@@ -109,7 +109,7 @@ Validation errors are returned with HTTP 422 and include details from `lib/graph
 
 ## Storage Configuration
 
-`flow-dash` supports multiple storage backends behind a common interface (`lib/storage/types.ts`).
+`instance` supports multiple storage backends behind a common interface (`lib/storage/types.ts`).
 
 Adapters:
 - Filesystem (`fs`): saves JSON files under `./projects`
@@ -166,8 +166,8 @@ See `docs/deploy.rst` for details.
 
 ## Documentation
 
-- Read the Docs (latest): https://flow-dash.readthedocs.io/en/latest/
-- API reference (Doxygen) on RTD: https://flow-dash.readthedocs.io/en/latest/_static/doxygen/index.html
+- Read the Docs (latest): https://instance.readthedocs.io/en/latest/
+- API reference (Doxygen) on RTD: https://instance.readthedocs.io/en/latest/_static/doxygen/index.html
 - Build locally:
   - Sphinx HTML: `pip install -r docs/requirements.txt && sphinx-build -b html docs docs/_build/html`
   - Doxygen API: `doxygen docs/Doxyfile` then open `docs/_static/doxygen/html/index.html`

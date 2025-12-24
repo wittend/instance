@@ -4,7 +4,7 @@
 # Generates HTML API docs into Sphinx static path so it can be served on RTD.
 
 # Project
-PROJECT_NAME           = "flow-dash"
+PROJECT_NAME           = "instance"
 PROJECT_NUMBER         = "1.0"
 OUTPUT_DIRECTORY       = _static/doxygen
 CREATE_SUBDIRS         = NO

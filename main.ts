@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// flow-dash server (TS). Serves static files from /public and JSON APIs under /api.
+// instance server (TS). Serves static files from /public and JSON APIs under /api.
 // Option B: TypeScript server with plain JS frontend.
 
 // Basic router helper
@@ -235,7 +235,7 @@ async function handleStatic(url: URL): Promise<Response> {
 }
 
 export function startServer(port: number, signal?: AbortSignal) {
-  console.log(`flow-dash server listening on http://localhost:${port}`);
+  console.log(`instance server listening on http://localhost:${port}`);
   // Initialize storage per-server to respect current env (useful in tests)
   const storagePromise = createStorageFromEnv();
   const server = Deno.serve({ port, signal }, async (req) => {

@@ -1,7 +1,7 @@
 Overview
 ========
 
-``flow-dash`` is a minimal flow-graph editor and runtime scaffold built on Deno. It presents a palette of reusable objects which you can drag onto a canvas and connect with directed links. The visual graph can be saved as a JSON project and reloaded later.
+``instance`` is a minimal flow-graph editor and runtime scaffold built on Deno. It presents a palette of reusable objects which you can drag onto a canvas and connect with directed links. The visual graph can be saved as a JSON project and reloaded later.
 
 Goals
 -----

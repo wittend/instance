@@ -1,4 +1,4 @@
-## Deno flow-dash requirements
+## Deno instance requirements
 #### 2025-11-03
 
 * Runtime: Deno stable or canary? Any required minimum version?
