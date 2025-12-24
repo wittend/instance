@@ -51,8 +51,16 @@ export function loadProject(data) {
   emit();
 }
 
-export function addNode({ id, guid, name, x, y, connectors }) {
-  state.nodes.push({ id, guid, name, x, y, connectors });
+export function addNode({ id, guid, name, x, y, connectors, code }) {
+  state.nodes.push({ id, guid, name, x, y, connectors, code });
+  markDirty(true);
+}
+
+export function updateNode(nodeId, { name, code }) {
+  const n = state.nodes.find((n) => n.id === nodeId);
+  if (!n) return;
+  if (name !== undefined) n.name = name;
+  if (code !== undefined) n.code = code;
   markDirty(true);
 }
 

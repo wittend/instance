@@ -226,6 +226,19 @@ header#menubar {
 .button:hover {
   background: var(--button-bg-hover);
 }
+.input {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 13px;
+}
+.input:focus {
+  outline: 2px solid var(--node-stroke);
+  outline-offset: -1px;
+}
 #palette .palette-item {
   display: flex;
   align-items: center;

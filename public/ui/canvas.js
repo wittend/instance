@@ -13,7 +13,9 @@ import {
   startLink,
   subscribe,
   updateLinkPreview,
+  updateNode,
 } from "./store.js";
+import { showNodeEditor } from "./popup_editor.js";
 
 // Helper for UUID generation in non-secure contexts
 function getUUID() {
@@ -138,6 +140,20 @@ export function initCanvas(canvasEl, svgEl) {
       dragging = { nodeId: node.id, offsetX: offX, offsetY: offY };
     } else {
       cancelLink();
+    }
+  });
+
+  canvasEl.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    const { x, y } = toCanvas(e);
+    const hit = hitTestNode(x, y);
+    if (hit) {
+      showNodeEditor(hit.node, {
+        x: hit.node.x,
+        y: hit.node.y,
+        canvasRect: canvasEl.getBoundingClientRect(),
+        onSave: () => render(),
+      });
     }
   });
 

@@ -16,6 +16,7 @@ export interface Node {
   x: number;
   y: number;
   connectors?: Connector[]; // optional: may be defined by object def instead
+  code?: Record<string, string>; // optional: instance-specific code overrides
 }
 
 export interface EdgeEnd {
@@ -131,6 +132,9 @@ export function validateProject(project: any): asserts project is ProjectData {
       nodeIds.add(n.id);
       if (typeof n.guid !== "string" || !n.guid) errors.push(`node.guid must be string [${n.id}]`);
       if (typeof n.x !== "number" || typeof n.y !== "number") errors.push(`node.x/y must be numbers [${n.id}]`);
+      if (n.code !== undefined && (typeof n.code !== "object" || n.code === null)) {
+        errors.push(`node.code must be object [${n.id}]`);
+      }
       if (n.connectors !== undefined) {
         if (!Array.isArray(n.connectors)) errors.push(`node.connectors must be array [${n.id}]`);
         const seen = new Set<string>();
