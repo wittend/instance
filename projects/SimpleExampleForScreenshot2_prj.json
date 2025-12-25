@@ -24,8 +24,8 @@
       "id": "n_7f039d2f",
       "guid": "sample-filter",
       "name": "Mixer",
-      "x": 642,
-      "y": 250,
+      "x": 641,
+      "y": 269,
       "connectors": [
         {
           "id": "out",
