@@ -1,23 +1,41 @@
 [
   {
-    "guid": "sample-generator",
-    "hash": "",
-    "name": "Sample Generator",
+    "guid": "generators",
+    "name": "Generators",
     "ordinal": 1,
-    "icon": "/assets/sample.svg"
+    "icon": "/assets/sample.svg",
+    "items": [
+      {
+        "guid": "sample-generator",
+        "name": "Sample Generator",
+        "icon": "/assets/sample.svg"
+      }
+    ]
   },
   {
-    "guid": "sample-filter",
-    "hash": "",
-    "name": "Sample Filter",
+    "guid": "filters",
+    "name": "Filters",
     "ordinal": 2,
-    "icon": "/assets/sample.svg"
+    "icon": "/assets/sample.svg",
+    "items": [
+      {
+        "guid": "sample-filter",
+        "name": "Sample Filter",
+        "icon": "/assets/sample.svg"
+      }
+    ]
   },
   {
-    "guid": "sample-sink",
-    "hash": "",
-    "name": "Sample Sink",
+    "guid": "sinks",
+    "name": "Sinks",
     "ordinal": 3,
-    "icon": "/assets/sample.svg"
+    "icon": "/assets/sample.svg",
+    "items": [
+      {
+        "guid": "sample-sink",
+        "name": "Sample Sink",
+        "icon": "/assets/sample.svg"
+      }
+    ]
   }
 ]

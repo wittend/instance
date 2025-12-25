@@ -1,9 +1,10 @@
 {
-  "guid": "sample-filter",
-  "name": "Sample Filter",
+  "guid": "sample-filter2",
+  "name": "Sample Filter2",
   "connectors": {
     "sources": [
-      { "id": "out1", "label": "out" }
+      { "id": "out1", "label": "out1" },
+      { "id": "out2", "label": "out2" }
     ],
     "sinks": [
       { "id": "in", "label": "in" }
