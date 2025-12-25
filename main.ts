@@ -59,17 +59,30 @@ async function handleApi(
     return json({ ok: true });
   }
 
-  if (pathname === "/api/palette" && method === "GET") {
-    try {
-      const text = await Deno.readTextFile("./public/palette_objects.json");
-      return new Response(text, { headers: { "content-type": CONTENT_TYPES[".json"] } });
-    } catch (e) {
-      console.error("/api/palette error", e);
-      return json({ error: "palette_objects.json not found" }, 404);
-    }
-  }
-
   if (segments[0] === "api" && segments[1] === "objects" && method === "GET") {
+    if (segments.length === 2) {
+      // List all objects
+      try {
+        const objects = [];
+        for await (const entry of Deno.readDir("./public/obj/")) {
+          if (entry.isFile && entry.name.endsWith("_obj.json")) {
+            const guid = entry.name.replace("_obj.json", "");
+            const text = await Deno.readTextFile(`./public/obj/${entry.name}`);
+            const def = JSON.parse(text);
+            objects.push({
+              guid,
+              name: def.name || guid,
+              icon: def.icon || "/assets/sample.svg",
+              category: def.category || "General",
+            });
+          }
+        }
+        return json(objects);
+      } catch (e) {
+        console.error("/api/objects list error", e);
+        return json({ error: "failed to list objects" }, 500);
+      }
+    }
     const guid = segments[2];
     if (!guid) return json({ error: "Missing guid" }, 400);
     try {

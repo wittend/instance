@@ -40,16 +40,12 @@ the screen, minimizeable, or hidden.
 The toolbar should have buttons for "New", "Save", "Save As". The menubar should have conventional
 drop-downs for "File", "Edit", "Tools", and "Help".
 
-The pallet will present objects made available in a file named palette_objects.json. This file will
-contain minimal descriptions of objects including the object's guid, a unique hash of the object's
-definition file to maintain integrity, the name to be displayed under the object in the palette and
-on the workspace, and an ordinal number that indicates where the palette entry is located in the
-palette. There should also be a reference to an .svg file that will appear on the palette button's
-surface for selection.
+The palette will present objects found in the `./obj` directory. Each object is defined in a file
+named `<guid>_obj.json`. These files contain descriptions of objects including the object's guid,
+name, category, and a reference to an .svg icon.
 
-The objects themselves will be defined in individual <_>_obj.json where <_> represents a same guid
-that references it in the palette_objects.json file. All of these object definition files should be
-stored in a directory "./obj" relative to the project's root.
+The objects themselves will be defined in individual `<guid>_obj.json` files stored in a directory
+"./obj" relative to the project's root (or `./public/obj` for static serving).
 
 Internally, the object files will contain JSON objects that list the object's source connectors,
 sink connectors, and snippets of executable Javascript code that may define actions performed on the

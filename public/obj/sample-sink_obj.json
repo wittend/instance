@@ -1,6 +1,7 @@
 {
   "guid": "sample-sink",
   "name": "Sample Sink",
+  "category": "Sinks",
   "connectors": {
     "sources": [],
     "sinks": [

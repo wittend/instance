@@ -1,6 +1,7 @@
 {
   "guid": "sample-filter2",
   "name": "Sample Filter2",
+  "category": "Filters",
   "connectors": {
     "sources": [
       { "id": "out1", "label": "out1" },

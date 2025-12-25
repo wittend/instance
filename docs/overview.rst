@@ -12,7 +12,7 @@ Goals
 
 Key Concepts
 ------------
-- Palette: Declared in ``palette_objects.json``. Each palette entry references a per-object definition file under ``./obj`` providing connector metadata and optional code snippets.
+- Palette: Populated from files in ``public/obj/``. Each JSON file defines an object, its connectors, and optionally its category.
 - Nodes: Instances on the canvas referencing a palette object's ``guid``. Nodes render with a header and labeled connector handles.
 - Connectors: Two kinds — ``source`` (right side) and ``sink`` (left side). Links must connect source → sink.
 - Edges: Directed connections rendered as SVG Bezier curves with arrowheads.

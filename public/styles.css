@@ -109,6 +109,7 @@ header#menubar {
   align-items: center;
   justify-content: flex-start;
   gap: 16px;
+  font-size: 13px;
 }
 .menu-title {
   font-weight: 600;
@@ -146,6 +147,7 @@ header#menubar {
   padding: 6px;
   display: none;
   z-index: 1000;
+  font-size: 12px;
 }
 .menu-item[aria-expanded="true"] .menu-dropdown {
   display: block;
@@ -255,6 +257,7 @@ header#menubar {
   cursor: pointer;
   transition: all 0.2s;
   user-select: none;
+  font-size: 13px;
 }
 
 #palette .palette-item:hover {
@@ -297,6 +300,7 @@ header#menubar {
   border-radius: 4px;
   cursor: grab;
   transition: background 0.1s;
+  font-size: 12px;
 }
 
 #palette .palette-sub-item:hover {

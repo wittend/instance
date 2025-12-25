@@ -63,7 +63,7 @@ Open the app:
 
 ## Using the App
 
-- The left panel shows the palette defined by `palette_objects.json`
+- The left panel shows the palette populated from files in `public/obj/`.
 - Drag items from the palette onto the canvas to create nodes
 - Move nodes by dragging their bodies
 - Create a connection by clicking a source handle (right) then a sink handle (left)
@@ -75,7 +75,7 @@ Open the app:
 All APIs are JSON over HTTP.
 
 - `GET /api/health` → `{ ok: true }`
-- `GET /api/palette` → returns `palette_objects.json`
+- `GET /api/objects` → returns metadata for all objects found in `public/obj/`
 - `GET /api/objects/:guid` → returns object definition from `./obj/<guid>_obj.json`
 - `GET /api/projects` → `{ projects: ["<id>_prj.json", ...] }`
 - `GET /api/projects/:id` → load a project (accepts `<id>` or `<id>_prj.json`)
@@ -176,7 +176,7 @@ See `docs/deploy.rst` for details.
 ## Schema and Palette
 
 - Project JSON schema and validation logic: `lib/graph.ts`
-- Palette: `palette_objects.json`
+- Palette objects: `public/obj/*.json`
 - Object definitions referenced by the palette: `./obj/*_obj.json`
 
 ## Roadmap / Ideas

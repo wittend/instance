@@ -1,6 +1,7 @@
 {
   "guid": "sample-generator",
   "name": "Sample Generator",
+  "category": "Generators",
   "connectors": {
     "sources": [
       { "id": "out", "label": "out" }
