@@ -114,7 +114,7 @@ header#menubar {
 .menu-title {
   font-weight: 600;
   letter-spacing: 0.2px;
-  margin-right: 12px;
+  margin-right: 13px;
 }
 .menu-groups {
   display: flex;
@@ -147,7 +147,7 @@ header#menubar {
   padding: 6px;
   display: none;
   z-index: 1000;
-  font-size: 12px;
+  font-size: 13px;
 }
 .menu-item[aria-expanded="true"] .menu-dropdown {
   display: block;
